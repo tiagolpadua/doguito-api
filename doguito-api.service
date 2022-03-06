@@ -1,0 +1,19 @@
+# https://docs.oracle.com/en/learn/use_systemd/index.html#introduction
+# https://oracle-base.com/articles/linux/linux-services-systemd#creating-linux-services
+# https://nodesource.com/blog/running-your-node-js-app-with-systemd-part-1/
+
+[Unit]
+Description=Doguito API Service
+After=network.target
+
+[Service]
+Environment="DB_USER=ADMIN"
+Environment="DB_PASSWORD=???"
+Environment="CONNECT_STRING=???"
+Type=simple
+User=opc
+ExecStart=/usr/bin/node /home/opc/doguito-api/bin/www
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
