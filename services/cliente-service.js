@@ -1,5 +1,4 @@
 const oracledb = require('oracledb');
-// const uuidv4 = require('uuid/v4');
 
 oracledb.outFormat = oracledb.OBJECT;
 oracledb.fetchAsString = [oracledb.CLOB];
@@ -11,6 +10,10 @@ module.exports = class ClienteService {
     constructor() { }
 
     static async init() {
+        console.log(`process.env.DB_USER: ${process.env.DB_USER}`);
+        console.log(`process.env.DB_PASSWORD: ${process.env.DB_PASSWORD}`);
+        console.log(`process.env.CONNECT_STRING: ${process.env.CONNECT_STRING}`);
+
         console.log('Criando pool de conexões...')
         await oracledb.createPool({
             user: process.env.DB_USER,
