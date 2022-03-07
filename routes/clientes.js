@@ -11,7 +11,12 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // Detalha um cliente
 router.get('/:id', asyncHandler(async (req, res) => {
-  res.send(await res.app.get(CLIENTE_SERVICE).getById(req.params.id));
+  const response = await res.app.get(CLIENTE_SERVICE).getById(req.params.id);
+  if (response) {
+    res.send(response);
+  } else {
+    res.sendStatus(404);
+  }
 }));
 
 // Insere um cliente
@@ -21,7 +26,12 @@ router.post('/', asyncHandler(async (req, res) => {
 
 // Altera um cliente
 router.put('/:id', asyncHandler(async (req, res) => {
-  res.status(200).send(await res.app.get(CLIENTE_SERVICE).update(req.params.id, req.body));
+  const response = await res.app.get(CLIENTE_SERVICE).update(req.params.id, req.body);
+  if (response) {
+    res.status(200).send(response);
+  } else {
+    res.sendStatus(404);
+  }
 }));
 
 // Exclui um cliente
